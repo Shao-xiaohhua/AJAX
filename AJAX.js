@@ -18,27 +18,27 @@ var getAJAX= function(params) {
        // IE6及其以下版本  
        xhr = new ActiveXObjcet('Microsoft.XMLHTTP');  
       }; 
-      　　 // 监听事件，只要 readyState 的值变化，就会调用 readystatechange 事件
-      xhr.onreadystatechange = function() { 
+      // 监听事件，只要 readyState 的值变化，就会调用 readystatechange 事件
+      xhr.onreadystatechange = function() {
        // readyState属性表示请求/响应过程的当前活动阶段，4为完成，已经接收到全部响应数据
-       if(xhr.readyState == 4) {  
-        var status = xhr.status; 
-        // status：响应的HTTP状态码，以2开头的都是成功
-        if(status >= 200 && status < 300) {  
-         var response = ''; 
-         // 判断接受数据的内容类型 
-         var type = xhr.getResponseHeader('Content-type');  
-         if(type.indexOf('xml') !== -1 && xhr.responseXML) {  
-          response = xhr.responseXML; //Document对象响应  
-         } else if(type === 'application/json') {  
-          response = JSON.parse(xhr.responseText); //JSON响应  
-         } else {  
-          response = xhr.responseText; //字符串响应  
-         }; 
-         // 成功回调函数 
-         res(response)
+       if(xhr.readyState == 4) {
+         var status = xhr.status;
+         // status：响应的HTTP状态码，以2开头的都是成功
+         if(status >= 200 && status < 300) {
+           var response = '';
+           // 判断接受数据的内容类型
+           var type = xhr.getResponseHeader('Content-type');
+           if(type.indexOf('xml') !== -1 && xhr.responseXML) {
+             response = xhr.responseXML; //Document对象响应
+           } else if(type === 'application/json') {
+             response = JSON.parse(xhr.responseText); //JSON响应
+           } else {
+             response = xhr.responseText; //字符串响应
+           };
+          // 成功回调函数
+          res(response);
         } else {  
-         rej(status)  
+          rej(status); 
         }  
        };  
       }; 
@@ -84,7 +84,8 @@ var getAJAX= function(params) {
        rej('超时');
       }, time);
      }
-     //格式化参数  
+    };
+    //格式化参数  
      function formatParams(data) {
        var arr = [];
        for(var name in data) {
@@ -99,7 +100,6 @@ var getAJAX= function(params) {
      function random() {
        return Math.floor(Math.random() * 10000 + 500);
      }
-    }; 
   });
   
   return promise;
@@ -108,8 +108,8 @@ var getAJAX= function(params) {
 // window.onload = function () {
 //   getAJAX(
 //     {
-//       url: 'http://xiaoliaotian.duapp.com/xupget',  // 请求地址
-//       jsonp: 'jsonpCallback', // 采用jsonp请求，且回调函数名为"jsonpCallbak"，可以设置为合法的字符串
+//       url: 'http://12348.justice.gov.cn/service/rest/orgstruct.Map/collection/mapgroupdata?pageSize=-1&jsonp=jsonp',  // 请求地址
+//       json: 'jsonpCallback', // 采用jsonp请求，且回调函数名为"jsonpCallbak"，可以设置为合法的字符串
 //       data: {'b': '异步请求'},  // 传输数据
 //     }
 //   ).then(function (json) {
